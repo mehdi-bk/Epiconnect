@@ -1,0 +1,28 @@
+mutation CreateUser @auth(level: USER) {
+  user_insert(data: {
+    displayName: "New User",
+    email: "newuser@example.com",
+    studentID: "1234567"
+    createdAt_expr: "request.time"
+  })
+}
+
+query ListPublicProjects @auth(level: PUBLIC, insecureReason: "This operation is safe to expose to the public") {
+  projects(where: {isPublic: {eq: true}}) {
+    id
+    title
+    description
+  }
+}
+
+mutation UpdateMyBio($bio: String) @auth(level: USER) {
+  user_update(key: {id_expr: "auth.uid"}, data: {bio: $bio})
+}
+
+query GetMyPosts @auth(level: USER) {
+  posts(where: {authorId: {eq_expr: "auth.uid"}}) {
+    id
+    content
+    createdAt
+  }
+}

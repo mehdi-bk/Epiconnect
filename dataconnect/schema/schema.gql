@@ -1,0 +1,61 @@
+type User @table {
+  displayName: String!
+  email: String!
+  studentID: String!
+  createdAt: Timestamp!
+  bio: String
+  photoUrl: String
+  githubProfileUrl: String
+  linkedinProfileUrl: String
+  skills: [String]
+}
+
+type Project @table {
+  title: String!
+  description: String!
+  repositoryUrl: String!
+  createdAt: Timestamp!
+  isPublic: Boolean!
+  screenshots: [String]
+  technologiesUsed: [String]
+  author: User
+}
+
+type Post @table {
+  content: String!
+  createdAt: Timestamp!
+  imageUrl: String
+  tags: [String]
+  author: User
+}
+
+type Comment @table {
+  content: String!
+  createdAt: Timestamp!
+  author: User
+  project: Project
+  post: Post
+}
+
+type Message @table {
+  content: String!
+  createdAt: Timestamp!
+  sender: User!
+  receiver: User!
+  readAt: Timestamp
+}
+
+type Conversation @table {
+  createdAt: Timestamp!
+  name: String
+}
+
+type ConversationParticipant @table(key: ["conversation", "user"]) {
+  conversation: Conversation!
+  user: User!
+}
+
+type UserFollow @table(key: ["follower", "followed"]) {
+  follower: User!
+  followed: User!
+}

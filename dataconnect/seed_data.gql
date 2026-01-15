@@ -1,0 +1,118 @@
+mutation CreateSeedData @transaction @auth(level: PUBLIC, insecureReason: "This operation is safe to expose to the public") {
+  user_insertMany(data: [
+    {
+      id: "550e8400-e29b-41d4-a716-446655440000",
+      displayName: "demouser1",
+      email: "demouser1@example.com",
+      studentID: "123456",
+      createdAt: "2024-04-26T12:00:00Z"
+    },
+    {
+      id: "550e8400-e29b-41d4-a716-446655440001",
+      displayName: "demouser2",
+      email: "demouser2@example.com",
+      studentID: "654321",
+      createdAt: "2024-04-26T13:00:00Z"
+    }
+  ])
+  project_insertMany(data: [
+    {
+      id: "660e8400-e29b-41d4-a716-446655440002",
+      authorId: "550e8400-e29b-41d4-a716-446655440000",
+      title: "Demo Project 1",
+      description: "This is a demo project",
+      repositoryUrl: "https://github.com/example/demo1",
+      isPublic: true,
+      createdAt: "2024-04-26T14:00:00Z"
+    },
+    {
+      id: "660e8400-e29b-41d4-a716-446655440003",
+      authorId: "550e8400-e29b-41d4-a716-446655440001",
+      title: "Demo Project 2",
+      description: "This is another demo project",
+      repositoryUrl: "https://github.com/example/demo2",
+      isPublic: false,
+      createdAt: "2024-04-26T15:00:00Z"
+    }
+  ])
+  post_insertMany(data: [
+    {
+      id: "770e8400-e29b-41d4-a716-446655440004",
+      authorId: "550e8400-e29b-41d4-a716-446655440000",
+      content: "Demo Post 1",
+      createdAt: "2024-04-26T16:00:00Z"
+    },
+    {
+      id: "770e8400-e29b-41d4-a716-446655440005",
+      authorId: "550e8400-e29b-41d4-a716-446655440001",
+      content: "Demo Post 2",
+      createdAt: "2024-04-26T17:00:00Z"
+    }
+  ])
+ comment_insertMany(data: [
+    {
+      id: "880e8400-e29b-41d4-a716-446655440006",
+      authorId: "550e8400-e29b-41d4-a716-446655440000",
+      projectId: "660e8400-e29b-41d4-a716-446655440002",
+      postId: "770e8400-e29b-41d4-a716-446655440004",
+      content: "Demo Comment 1",
+      createdAt: "2024-04-26T18:00:00Z"
+    },
+    {
+      id: "880e8400-e29b-41d4-a716-446655440007",
+      authorId: "550e8400-e29b-41d4-a716-446655440001",
+      projectId: "660e8400-e29b-41d4-a716-446655440003",
+      postId: "770e8400-e29b-41d4-a716-446655440005",
+      content: "Demo Comment 2",
+      createdAt: "2024-04-26T19:00:00Z"
+    }
+  ])
+  conversation_insertMany(data: [
+    {
+      id: "990e8400-e29b-41d4-a716-446655440008",
+      name: "Demo Conversation 1",
+      createdAt: "2024-04-26T20:00:00Z"
+    },
+    {
+      id: "990e8400-e29b-41d4-a716-446655440009",
+      name: "Demo Conversation 2",
+      createdAt: "2024-04-26T21:00:00Z"
+    }
+  ])
+ conversationParticipant_insertMany(data: [
+    {
+      conversationId: "990e8400-e29b-41d4-a716-446655440008",
+      userId: "550e8400-e29b-41d4-a716-446655440000",
+    },
+    {
+      conversationId: "990e8400-e29b-41d4-a716-446655440009",
+      userId: "550e8400-e29b-41d4-a716-446655440001",
+    }
+  ])
+  message_insertMany(data: [
+    {
+      id: "aa0e8400-e29b-41d4-a716-446655440010",
+      senderId: "550e8400-e29b-41d4-a716-446655440000",
+      receiverId: "550e8400-e29b-41d4-a716-446655440001",
+      content: "Demo Message 1",
+      createdAt: "2024-04-26T22:00:00Z"
+    },
+    {
+      id: "aa0e8400-e29b-41d4-a716-446655440011",
+      senderId: "550e8400-e29b-41d4-a716-446655440001",
+      receiverId: "550e8400-e29b-41d4-a716-446655440000",
+      content: "Demo Message 2",
+      createdAt: "2024-04-26T23:00:00Z"
+    }
+  ])
+  userFollow_insertMany(data: [
+    {
+      followerId: "550e8400-e29b-41d4-a716-446655440000",
+      followedId: "550e8400-e29b-41d4-a716-446655440001",
+    },
+    {
+      followerId: "550e8400-e29b-41d4-a716-446655440001",
+      followedId: "550e8400-e29b-41d4-a716-446655440000",
+    }
+  ])
+}
